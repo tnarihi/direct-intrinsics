@@ -1,0 +1,14 @@
+net: "train_val.prototxt"
+base_lr: 0.002
+display: 1
+average_loss: 1
+max_iter: 412500
+momentum: 0.9
+weight_decay: 1e-06
+snapshot: 5000
+snapshot_prefix: "snapshot_"
+lr_policy: "poly"
+power: 0.5
+iter_size: 8
+share_blobs: true
+

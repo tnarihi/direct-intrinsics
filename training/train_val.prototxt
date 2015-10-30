@@ -1,0 +1,1158 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+name: "train_direct_intrinsics"
+
+
+layer {
+  name: "data"
+  type: "Python"
+  top: "data"
+  python_param {
+    module: "caffe_helper.layers.data_layers"
+    layer: "ImageDataLayer"
+    param_str: "dict(batch_size=4, source=expandvars('DI_DATA/sources_18_barron_mit2_sintel_balance/source_RS_train.txt'), root=expandvars('$DI_DATA/sintel/images_mit_sintel/'), mirror=True, shuffle=True, mean_value=[104, 117, 123], crop_size=(416, 416), pad=0, random_crop=True, random_scale=(1.0-0.2, 1.0+0.2), random_rotation=15, border_mode='BORDER_REFLECT')"
+  }
+  include: { phase: TRAIN }
+}
+
+
+
+layer {
+  name: "albedo"
+  type: "Python"
+  top: "albedo"
+  python_param {
+    module: "caffe_helper.layers.data_layers"
+    layer: "ImageDataLayer"
+    param_str: "dict(batch_size=4, source=expandvars('$DI_DATA/sintel/sources_18_barron_mit2_sintel_balance/source_albedo_train.txt'), root=expandvars('$DI_DATA/sintel/images_mit_sintel/'), mirror=True, shuffle=True, color=True, crop_size=(416, 416), pad=0, random_crop=True, scale=1/256., random_scale=(1.0-0.2, 1.0+0.2), random_rotation=15)"
+  }
+  include: { phase: TRAIN }
+}
+
+
+
+
+layer {
+  name: "shading"
+  type: "Python"
+  top: "shading"
+  python_param {
+    module: "caffe_helper.layers.data_layers"
+    layer: "ImageDataLayer"
+    param_str: "dict(batch_size=4, source=expandvars('$DI_DATA/sintel/sources_18_barron_mit2_sintel_balance/source_shading_train.txt'), root=expandvars('$DI_DATA/sintel/images_mit_sintel/'), mirror=True, shuffle=True, color=True, crop_size=(416, 416), pad=0, random_crop=True, scale=1/256., random_scale=(1.0-0.2, 1.0+0.2), random_rotation=15)"
+  }
+  include: { phase: TRAIN }
+}
+
+
+
+layer {
+  name: "mask-a"
+  type: "Python"
+  top: "mask-a"
+  python_param {
+    module: "caffe_helper.layers.data_layers"
+    layer: "ImageDataLayer"
+    param_str: "dict(batch_size=4, source=expandvars('$DI_DATA/sintel/sources_18_barron_mit2_sintel_balance/source_albedo_defect_mask_train.txt'), root=expandvars('$DI_DATA/sintel/images_mit_sintel/'), mirror=True, shuffle=True, color=True, crop_size=(416, 416), pad=0, random_crop=True, random_scale=(1.0-0.2, 1.0+0.2), random_rotation=15)"
+  }
+  include: { phase: TRAIN }
+}
+
+
+layer {
+  name: "mask-s"
+  type: "Python"
+  top: "mask-s"
+  python_param {
+    module: "caffe_helper.layers.data_layers"
+    layer: "ImageDataLayer"
+    param_str: "dict(batch_size=4, source=expandvars('$DI_DATA/sintel/sources_18_barron_mit2_sintel_balance/source_albedo_defect_mask_s_train.txt'), root=expandvars('$DI_DATA/sintel/images_mit_sintel/'), mirror=True, shuffle=True, color=True, crop_size=(416, 416), pad=0, random_crop=True, random_scale=(1.0-0.2, 1.0+0.2), random_rotation=15)"
+  }
+  include: { phase: TRAIN }
+}
+
+
+
+layer {
+  name: "data"
+  type: "Python"
+  top: "data"
+  python_param {
+    module: "caffe_helper.layers.data_layers"
+    layer: "ImageDataLayer"
+    param_str: "dict(batch_size=4, source=expandvars('$DI_DATA/sintel/sources_18_barron_mit2_sintel_balance/source_RS_test.txt'), root=expandvars('$DI_DATA/sintel/images_mit_sintel/'), mean_value=[104, 117, 123], crop_size=(416, 416), shuffle=True, pad=0)"
+  }
+  include: { phase: TEST }
+}
+
+
+
+layer {
+  name: "albedo"
+  type: "Python"
+  top: "albedo"
+  python_param {
+    module: "caffe_helper.layers.data_layers"
+    layer: "ImageDataLayer"
+    param_str: "dict(batch_size=4, source=expandvars('$DI_DATA/sintel/sources_18_barron_mit2_sintel_balance/source_albedo_test.txt'), root=expandvars('$DI_DATA/sintel/images_mit_sintel/)', color=True, crop_size=(416, 416), scale=1/256., shuffle=True, pad=0)"
+  }
+  include: { phase: TEST }
+}
+
+
+
+
+layer {
+  name: "shading"
+  type: "Python"
+  top: "shading"
+  python_param {
+    module: "caffe_helper.layers.data_layers"
+    layer: "ImageDataLayer"
+    param_str: "dict(batch_size=4, source=expandvars('$DI_DATA/sintel/sources_18_barron_mit2_sintel_balance/source_shading_test.txt'), root=expandvars('$DI_DATA/sintel/images_mit_sintel/'), color=True, crop_size=(416, 416), scale=1/256., shuffle=True, pad=0)"
+  }
+  include: { phase: TEST }
+}
+
+
+
+layer {
+  name: "mask-a"
+  type: "Python"
+  top: "mask-a"
+  python_param {
+    module: "caffe_helper.layers.data_layers"
+    layer: "ImageDataLayer"
+    param_str: "dict(batch_size=4, source=expandvars('$DI_DATA/sintel/sources_18_barron_mit2_sintel_balance/source_albedo_defect_mask_test.txt'), root=expandvars('$DI_DATA/sintel/images_mit_sintel/'), color=True, crop_size=(416, 416), shuffle=True, pad=0)"
+  }
+  include: { phase: TEST }
+}
+
+
+layer {
+  name: "mask-s"
+  type: "Python"
+  top: "mask-s"
+  python_param {
+    module: "caffe_helper.layers.data_layers"
+    layer: "ImageDataLayer"
+    param_str: "dict(batch_size=4, source=expandvars('$DI_DATA/sintel/sources_18_barron_mit2_sintel_balance/source_albedo_defect_mask_s_test.txt'), root=expandvars('$DI_DATA/sintel/images_mit_sintel/'), color=True, crop_size=(416, 416), shuffle=True, pad=0)"
+  }
+  include: { phase: TEST }
+}
+
+
+
+
+# BVLC convolutions
+
+
+
+
+
+
+
+
+
+
+
+
+
+layer {
+  name: "conv1"
+  type: "Convolution"
+  bottom: "data"
+  top: "conv1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+    name: "conv1_w"
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+    name: "conv1_b"
+  }
+  convolution_param {
+    num_output: 96
+    kernel_size: 11
+    stride: 4
+    group: 1
+    pad: 5
+    weight_filler {
+      std: 0.01
+      type: "gaussian"
+      
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+      
+    }
+  }
+}
+
+layer {
+  name: "conv1-nonlin"
+  type: "ReLU"
+  bottom: "conv1"
+  top: "conv1"
+  
+}
+
+
+
+layer {
+  name: "conv1-pool"
+  type: "Pooling"
+  bottom: "conv1"
+  top: "conv1-pool"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+
+
+layer {
+  name: "conv1-norm"
+  type: "LRN"
+  bottom: "conv1-pool"
+  top: "conv1-norm"
+  lrn_param {
+    local_size: 5
+    alpha: 0.0001
+    beta: 0.75
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+layer {
+  name: "conv2"
+  type: "Convolution"
+  bottom: "conv1-norm"
+  top: "conv2"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+    name: "conv2_w"
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+    name: "conv2_b"
+  }
+  convolution_param {
+    num_output: 256
+    kernel_size: 5
+    stride: 1
+    group: 2
+    pad: 2
+    weight_filler {
+      std: 0.01
+      type: "gaussian"
+      
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+      
+    }
+  }
+}
+
+layer {
+  name: "conv2-nonlin"
+  type: "ReLU"
+  bottom: "conv2"
+  top: "conv2"
+  
+}
+
+
+
+layer {
+  name: "conv2-pool"
+  type: "Pooling"
+  bottom: "conv2"
+  top: "conv2-pool"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+
+
+layer {
+  name: "conv2-norm"
+  type: "LRN"
+  bottom: "conv2-pool"
+  top: "conv2-norm"
+  lrn_param {
+    local_size: 5
+    alpha: 0.0001
+    beta: 0.75
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+layer {
+  name: "conv3"
+  type: "Convolution"
+  bottom: "conv2-norm"
+  top: "conv3"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+    name: "conv3_w"
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+    name: "conv3_b"
+  }
+  convolution_param {
+    num_output: 384
+    kernel_size: 3
+    stride: 1
+    group: 1
+    pad: 1
+    weight_filler {
+      std: 0.01
+      type: "gaussian"
+      
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+      
+    }
+  }
+}
+
+layer {
+  name: "conv3-nonlin"
+  type: "ReLU"
+  bottom: "conv3"
+  top: "conv3"
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+layer {
+  name: "conv4"
+  type: "Convolution"
+  bottom: "conv3"
+  top: "conv4"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+    name: "conv4_w"
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+    name: "conv4_b"
+  }
+  convolution_param {
+    num_output: 384
+    kernel_size: 3
+    stride: 1
+    group: 2
+    pad: 1
+    weight_filler {
+      std: 0.01
+      type: "gaussian"
+      
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+      
+    }
+  }
+}
+
+layer {
+  name: "conv4-nonlin"
+  type: "ReLU"
+  bottom: "conv4"
+  top: "conv4"
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+layer {
+  name: "conv5"
+  type: "Convolution"
+  bottom: "conv4"
+  top: "conv5"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+    name: "conv5_w"
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+    name: "conv5_b"
+  }
+  convolution_param {
+    num_output: 256
+    kernel_size: 3
+    stride: 1
+    group: 2
+    pad: 1
+    weight_filler {
+      std: 0.01
+      type: "gaussian"
+      
+    }
+    bias_filler {
+      type: "constant"
+      value: 1
+      
+    }
+  }
+}
+
+layer {
+  name: "conv5-nonlin"
+  type: "ReLU"
+  bottom: "conv5"
+  top: "conv5"
+  
+}
+
+
+
+layer {
+  name: "conv5-pool"
+  type: "Pooling"
+  bottom: "conv5"
+  top: "conv5-pool"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+
+
+
+
+
+# Upsampling hypercolumns
+
+
+
+
+
+
+
+layer {
+  name: "conv5-upsample", type: "Deconvolution"
+  bottom: "conv5-pool" top: "conv5-upsample"
+  convolution_param {
+    kernel_size: 16 stride: 8
+    num_output: 256 group: 256
+    pad: 4
+    weight_filler: { type: "bilinear_upsampling" } bias_term: false
+  }
+  param { lr_mult: 0 decay_mult: 0 }
+}
+
+
+# Concatinating columns
+
+# Transform into `num_out` dim
+
+
+  
+
+
+
+
+
+
+
+layer {
+  name: "s1-out"
+  type: "Convolution"
+  bottom: "conv5-upsample"
+  top: "s1-out"
+  param {
+    lr_mult: 10
+    decay_mult: 1
+    
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+    
+  }
+  convolution_param {
+    num_output: 64
+    kernel_size: 1
+    stride: 1
+    
+    pad: 0
+    weight_filler {
+      std: 0.01
+      type: "gaussian"
+      
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+      
+    }
+  }
+}
+
+layer {
+  name: "s1-out-nonlin"
+  type: "PReLU"
+  bottom: "s1-out"
+  top: "s1-out"
+  
+  param {
+    decay_mult: 0
+    lr_mult: 10
+    
+  }
+  
+}
+
+
+layer {
+  name: "s1-out-drop"
+  type: "Dropout"
+  bottom: "s1-out"
+  top: "s1-out"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+layer {
+  name: "s2-1"
+  type: "Convolution"
+  bottom: "data"
+  top: "s2-1"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+    
+  }
+  param {
+    lr_mult: 2
+    decay_mult: 0
+    
+  }
+  convolution_param {
+    num_output: 96
+    kernel_size: 9
+    stride: 2
+    
+    pad: 4
+    weight_filler {
+      std: 0.001
+      type: "gaussian"
+      
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+      
+    }
+  }
+}
+
+layer {
+  name: "s2-1-nonlin"
+  type: "PReLU"
+  bottom: "s2-1"
+  top: "s2-1"
+  
+  param {
+    decay_mult: 0
+    lr_mult: 10
+    
+  }
+  
+}
+
+
+
+layer {
+  name: "s2-1-pool"
+  type: "Pooling"
+  bottom: "s2-1"
+  top: "s2-1-pool"
+  pooling_param {
+    pool: MAX
+    kernel_size: 3
+    stride: 2
+  }
+}
+
+
+
+
+layer {
+  name: "s2-concat"
+  type: "Concat"
+  bottom: "s2-1-pool" bottom: "s1-out" top: "s2-concat"
+}
+
+
+
+
+
+
+
+layer {
+  name: "s2-2"
+  type: "Convolution"
+  bottom: "s2-concat"
+  top: "s2-2"
+  param {
+    lr_mult: 10
+    decay_mult: 1
+    
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+    
+  }
+  convolution_param {
+    num_output: 64
+    kernel_size: 5
+    stride: 1
+    
+    pad: 2
+    weight_filler {
+      std: 0.01
+      type: "gaussian"
+      
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+      
+    }
+  }
+}
+
+layer {
+  name: "s2-2-nonlin"
+  type: "PReLU"
+  bottom: "s2-2"
+  top: "s2-2"
+  
+  param {
+    decay_mult: 0
+    lr_mult: 10
+    
+  }
+  
+}
+
+
+layer {
+  name: "s2-2-drop"
+  type: "Dropout"
+  bottom: "s2-2"
+  top: "s2-2"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+layer {
+  name: "s2-3"
+  type: "Convolution"
+  bottom: "s2-2"
+  top: "s2-3"
+  param {
+    lr_mult: 10
+    decay_mult: 1
+    
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+    
+  }
+  convolution_param {
+    num_output: 64
+    kernel_size: 5
+    stride: 1
+    
+    pad: 2
+    weight_filler {
+      std: 0.01
+      type: "gaussian"
+      
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+      
+    }
+  }
+}
+
+layer {
+  name: "s2-3-nonlin"
+  type: "PReLU"
+  bottom: "s2-3"
+  top: "s2-3"
+  
+  param {
+    decay_mult: 0
+    lr_mult: 10
+    
+  }
+  
+}
+
+
+layer {
+  name: "s2-3-drop"
+  type: "Dropout"
+  bottom: "s2-3"
+  top: "s2-3"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+layer {
+  name: "s2-4"
+  type: "Convolution"
+  bottom: "s2-3"
+  top: "s2-4"
+  param {
+    lr_mult: 10
+    decay_mult: 1
+    
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+    
+  }
+  convolution_param {
+    num_output: 64
+    kernel_size: 5
+    stride: 1
+    
+    pad: 2
+    weight_filler {
+      std: 0.01
+      type: "gaussian"
+      
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+      
+    }
+  }
+}
+
+layer {
+  name: "s2-4-nonlin"
+  type: "PReLU"
+  bottom: "s2-4"
+  top: "s2-4"
+  
+  param {
+    decay_mult: 0
+    lr_mult: 10
+    
+  }
+  
+}
+
+
+layer {
+  name: "s2-4-drop"
+  type: "Dropout"
+  bottom: "s2-4"
+  top: "s2-4"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+layer {
+  name: "s2-5-albedo"
+  type: "Convolution"
+  bottom: "s2-4"
+  top: "s2-5-albedo"
+  param {
+    lr_mult: 10
+    decay_mult: 1
+    
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+    
+  }
+  convolution_param {
+    num_output: 64
+    kernel_size: 5
+    stride: 1
+    
+    pad: 2
+    weight_filler {
+      std: 0.01
+      type: "gaussian"
+      
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+      
+    }
+  }
+}
+
+layer {
+  name: "s2-5-albedo-nonlin"
+  type: "PReLU"
+  bottom: "s2-5-albedo"
+  top: "s2-5-albedo"
+  
+  param {
+    decay_mult: 0
+    lr_mult: 10
+    
+  }
+  
+}
+
+
+layer {
+  name: "s2-5-albedo-drop"
+  type: "Dropout"
+  bottom: "s2-5-albedo"
+  top: "s2-5-albedo"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+layer {
+  name: "s2-5-shading"
+  type: "Convolution"
+  bottom: "s2-4"
+  top: "s2-5-shading"
+  param {
+    lr_mult: 10
+    decay_mult: 1
+    
+  }
+  param {
+    lr_mult: 20
+    decay_mult: 0
+    
+  }
+  convolution_param {
+    num_output: 64
+    kernel_size: 5
+    stride: 1
+    
+    pad: 2
+    weight_filler {
+      std: 0.01
+      type: "gaussian"
+      
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
+      
+    }
+  }
+}
+
+layer {
+  name: "s2-5-shading-nonlin"
+  type: "PReLU"
+  bottom: "s2-5-shading"
+  top: "s2-5-shading"
+  
+  param {
+    decay_mult: 0
+    lr_mult: 10
+    
+  }
+  
+}
+
+
+layer {
+  name: "s2-5-shading-drop"
+  type: "Dropout"
+  bottom: "s2-5-shading"
+  top: "s2-5-shading"
+  dropout_param {
+    dropout_ratio: 0.5
+  }
+}
+
+
+
+
+
+
+
+
+
+layer {
+  type: "Threshold"
+  name: "mask-thr-a"
+  bottom: "mask-a"
+  top: "mask-a"
+  threshold_param {
+    threshold: 128
+  }
+}
+layer {
+  type: "Threshold"
+  name: "mask-thr-s"
+  bottom: "mask-s"
+  top: "mask-s"
+  threshold_param {
+    threshold: 128
+  }
+}
+
+
+
+
+layer {
+  name: "up-albedo" type: "Deconvolution"
+  bottom: "s2-5-albedo" top: "out-albedo"
+  convolution_param {
+    kernel_size: 8 stride: 4
+    num_output: 3 group: 1
+    pad: 2
+    weight_filler: { type: "gaussian" std: 0.001 } bias_term: true
+  }
+  param { lr_mult: 10 decay_mult: 1 }
+  param { lr_mult: 20 decay_mult: 0 }
+}
+
+layer {
+  name: "log-albedo"
+  bottom: "albedo"
+  top: "albedo"
+  type: "Python"
+  python_param {
+    module: "caffe_helper.layers.common_layers"
+    layer: "LogLayer"
+    param_str: "dict(offset=0.5)"
+  }
+}
+layer {
+  name: "loss-albedo"
+  type: "Python"
+  bottom: "out-albedo"
+  bottom: "albedo"
+  bottom: "mask-a"
+  top: "loss-albedo"
+  loss_weight: 1
+  python_param {
+    module: "caffe_helper.layers.loss_layers"
+    layer: "ScaleInvariantL2LossLayer"
+    param_str: "{'lambda': 1.0}"
+  }
+}
+
+
+
+layer {
+  name: "up-shading" type: "Deconvolution"
+  bottom: "s2-5-shading" top: "out-shading"
+  convolution_param {
+    kernel_size: 8 stride: 4
+    num_output: 3 group: 1
+    pad: 2
+    weight_filler: { type: "gaussian" std: 0.001 } bias_term: true
+  }
+  param { lr_mult: 10 decay_mult: 1 }
+  param { lr_mult: 20 decay_mult: 0 }
+}
+
+layer {
+  name: "log-shading"
+  bottom: "shading"
+  top: "shading"
+  type: "Python"
+  python_param {
+    module: "caffe_helper.layers.common_layers"
+    layer: "LogLayer"
+    param_str: "dict(offset=0.5)"
+  }
+}
+layer {
+  name: "loss-shading"
+  type: "Python"
+  bottom: "out-shading"
+  bottom: "shading"
+  bottom: "mask-s"
+  top: "loss-shading"
+  loss_weight: 1
+  python_param {
+    module: "caffe_helper.layers.loss_layers"
+    layer: "ScaleInvariantL2LossLayer"
+    param_str: "{'lambda': 1.0}"
+  }
+}
+
