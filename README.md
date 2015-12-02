@@ -6,18 +6,12 @@ This is a project site of Direct Intrinsics:
 
 TODO: Write details about Direct Intrinsics here.
 
-## Dataset
-TODO: Write about dataset
+## [Run trained models](model_release)
 
-## Run trained models
-See [model_release](model_release).
-
-TODO: More details
-
-## Train a new model
-See [training](training).
-
-TODO: More details
+## Training a new model
+* [Prepare Dataset](.)
+TODO: Right link
+* [How to train](training)
 
 
 
