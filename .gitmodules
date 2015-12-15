@@ -1,0 +1,6 @@
+[submodule "modified_caffe/caffe"]
+	path = modified_caffe/caffe
+	url = git@github.com:tnarihi/caffe.git
+[submodule "modified_caffe/caffe_helper"]
+	path = modified_caffe/caffe_helper
+	url = git@github.com:tnarihi/tnarihi-caffe-helper.git

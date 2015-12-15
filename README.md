@@ -1,19 +1,30 @@
 # Direct Intrinsics
 
-Model release of our ICCV 2015 paper for BVLC CAFFE framework:
+This is a project web site of our work on ICCV 2015 described in:
 
-    Takuya Narihira, Michael Maire, and Stella X. Yu. Direct Intrinsics: Learning Albedo-Shading Decomposition by Convolutional Regression. International Conference on Computer Vision, 2015
-	
-See *.ipynb in IPython notebook for example usage.
-There are some hard-coded paths to Caffe and images.
-You have to modify them to fit your environment.
-The models run on [master of CAFFE](https://github.com/BVLC/caffe/commit/6232dfcd1422077304fbf50b00afe24c5a0427ee).
+> [Direct Intrinsics: Learning Albedo-Shading Decomposition by Convolutional Regression](http://www.cv-foundation.org/openaccess/content_iccv_2015/papers/Narihira_Direct_Intrinsics_Learning_ICCV_2015_paper.pdf)
+> [arxiv](http://arxiv.org/abs/1512.02311)
+> Takuya Narihira, Michael Maire, and Stella X. Yu
+> International Conference on Computer Vision (ICCV), 2015
 
-### Model files
+# Code release
+## Run trained model
+* See [model_release](model_release)
 
-* sintel_final_train.caffemodel: `MSCR+dropout+deconv+DA+GenMIT` for Sintel prediction.
-Trained on our training split.
-* sintel_final_test.caffemodel: `MSCR+dropout+deconv+DA+GenMIT` for Sintel prediction.
-Trained on our testing split.
-* mit_final_barron_train.caffemodel: `Ours + ResynthSintel` for MIT prediction.
-Trained on training set of Barron's split.
+## Training a new model
+* [Prepare Dataset](data)
+* [How to train](training)
+
+## Citation
+
+If you make use of this software, please cite the following in any publications:
+
+    @inproceedings{NMY:ICCV:2015,
+        title     = {Direct Intrinsics: Learning Albedo-Shading Decomposition by Convolutional Regression},
+        author    = {Takuya Narihira, Michael Maire and Stella X. Yu},
+        booktitle = {International Conference on Computer Vision (ICCV)},
+        year      = {2015}
+    }
+
+
+## License
