@@ -9,8 +9,7 @@ TODO: Write details about Direct Intrinsics here.
 ## [Run trained models](model_release)
 
 ## Training a new model
-* [Prepare Dataset](.)
-TODO: Right link
+* [Prepare Dataset](data)
 * [How to train](training)
 
 
