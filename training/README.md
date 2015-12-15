@@ -9,4 +9,4 @@ The above dependencies are contained in [modified_caffe](../modified_caffe) as s
 
 
 We recommend you to initialize weights in scale 1 BVLC Caffe reference net (conv1-conv5) by learned weights on ImageNet (provided in model zoo).
-Note that you have to modify train_val.prototxt to point right paths to your dataset.
+Note that you have to modify train_val.prototxt to point right paths to your dataset. You can create datset from [../data](../data).
